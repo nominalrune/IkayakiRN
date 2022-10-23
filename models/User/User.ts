@@ -1,4 +1,4 @@
-import { Str, Int, DateTime } from '../ValueObjectTemplates';
+import { Str, Int, DateTime } from '../ValueObjectTemplates/BaseClass';
 
 export interface IUser {
 	id: UserId;
