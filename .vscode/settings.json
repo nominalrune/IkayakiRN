@@ -1,5 +1,6 @@
 {
 	"docwriter.progress.trackFunctions": false,
 	"docwriter.progress.trackMethods": false,
-	"docwriter.progress.trackClasses": true
+	"docwriter.progress.trackClasses": true,
+	"typescript.tsdk": "node_modules\\typescript\\lib"
 }

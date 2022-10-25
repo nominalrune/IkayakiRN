@@ -12,3 +12,19 @@ async function openDatabase(pathToDatabaseFile: string): Promise<SQLite.WebSQLDa
 	);
 	return SQLite.openDatabase('myDatabaseName.db');
   }
+export class SqliteObject{
+	public async get<T>(itemName:string):Promise<T[]>{
+		const tasks= await openDatabase('./assets/database.sqlite').then(db => {
+			let tasks : T[] = [];
+			db.transaction(tx => {
+			  tx.executeSql(
+				`select * from ${itemName}`,
+				[itemName],
+				(_, { rows: { _array } }) => tasks=_array
+			  );
+			});
+			return tasks;
+		  });
+		return tasks;
+	}
+}
