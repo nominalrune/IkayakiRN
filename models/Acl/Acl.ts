@@ -1,6 +1,6 @@
-import { Str, Int, DateTime } from "../ValueObjectTemplates/BaseClass";
-import { Id } from "../ValueObjectTemplates/Id";
-import { IUser } from "../User/User";
+import { Str, Int, DateTime } from "/models/ValueObjectTemplates/BaseClass";
+import { Id } from "/models/ValueObjectTemplates/Id";
+import { IUser } from "/models/User/User";
 export interface IAcl<T> {
 	objectId: Id<T>;
 	userId: Id<IUser>;
