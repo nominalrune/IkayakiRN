@@ -13,14 +13,17 @@ interface IRecord {
 	title: string;
 	detail?: string;
 	userId: Id<IUser>;
+	user: IUser;
 	acl: Acl<IRecord>;
 	taskId?: Id<ITask>;
+	task?:ITask;
 }
 
 export class Record implements IRecord {
 	public readonly id: Id<IRecord>;
 	public readonly acl: Acl<IRecord>;
 	public readonly userId: Id<IUser>;
+	public readonly user: IUser;
 	constructor(
 		{user, role}: {user:IUser, role?:Partial<IRole>},
 		public title: string,
@@ -30,6 +33,7 @@ export class Record implements IRecord {
 		public taskId?: Id<ITask>,
 		id?:number
 	) {
+		this.user = user;
 		this.id= new Id<IRecord>(id);
 		this.userId= user.id;
 		this.acl = new Acl<IRecord>(this.id, user.id, role);

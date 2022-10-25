@@ -1,18 +1,17 @@
-import type { StateManager } from '../../models/StateManager';
+import {Repository} from '/models/Repository/Repository';
 import { View, Text } from 'react-native';
-export function RecordList({ stateManager }: { stateManager: StateManager; }) {
-	if (stateManager.records().length === 0) {
+export function RecordList({ repository }: { repository: Repository; }) {
+	if (repository.records.size === 0) {
 		return <div>There are no records.</div>;
 	}
 	return (
 		<View>
-			{stateManager.records().map((record, i) => (
+			{[...repository.records.values()].map((record, i) => (
 				<View>
-					<Text key={i}>{record.title}</Text>
-					<Text key={i}>{record.description}</Text>
-					<Text key={i}>{record.title}</Text>
+					<Text key={i+record.title}>{record.title}</Text>
+					<Text key={i+record.description.slice(0,5)}>{record.description}</Text>
+					<Text key={i+record.user.name}>{record.user.name}</Text>
 				</View>
-
 			))}
 		</View>
 	);

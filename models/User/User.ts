@@ -1,20 +1,20 @@
 import { Str, Int, DateTime } from '../ValueObjectTemplates/BaseClass';
+import { Id } from '../ValueObjectTemplates/Id';
 
 export interface IUser {
-	id: UserId;
+	id: Id<IUser>;
 	createdAt: DateTime;
 	updatedAt: DateTime;
-	name: String;
-	email: String;
-	passwordHash: String;
+	name: string;
+	email: string;
+	passwordHash: string;
 	meta: IUserMeta[];
 	acls: unknown[];
 }
-class UserId extends Int{}
 export interface IUserMeta {
-	id: Int;
-	userId: Int;
+	id: Id<IUserMeta>;
+	userId: number;
 	user: IUser;
-	key: Str;
-	value: Str;
+	key: string;
+	value: string;
 }
