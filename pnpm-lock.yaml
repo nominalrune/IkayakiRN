@@ -7,6 +7,9 @@ specifiers:
   '@types/react-native': ~0.69.1
   babel-preset-expo: ^9.2.0
   expo: ~46.0.13
+  expo-asset: ~8.6.1
+  expo-file-system: ~14.1.0
+  expo-sqlite: ~10.3.0
   expo-status-bar: ~1.4.0
   react: 18.0.0
   react-dom: 18.0.0
@@ -17,6 +20,9 @@ specifiers:
 dependencies:
   '@expo/webpack-config': 0.17.2_jnlmfjh43ps2qiose3hkhokxfa
   expo: 46.0.15_@babel+core@7.19.3
+  expo-asset: 8.6.1_expo@46.0.15
+  expo-file-system: 14.1.0_expo@46.0.15
+  expo-sqlite: 10.3.0_expo@46.0.15
   expo-status-bar: 1.4.0
   react: 18.0.0
   react-dom: 18.0.0_react@18.0.0
@@ -1658,6 +1664,16 @@ packages:
       - webpack-command
     dev: false
 
+  /@expo/websql/1.0.1:
+    resolution: {integrity: sha512-H9/t1V7XXyKC343FJz/LwaVBfDhs6IqhDtSYWpt8LNSQDVjf5NvVJLc5wp+KCpRidZx8+0+YeHJN45HOXmqjFA==}
+    dependencies:
+      argsarray: 0.0.1
+      immediate: 3.3.0
+      noop-fn: 1.0.0
+      pouchdb-collections: 1.0.1
+      tiny-queue: 0.2.1
+    dev: false
+
   /@expo/xcpretty/4.2.2:
     resolution: {integrity: sha512-Lke/geldJqUV0Dfxg5/QIOugOzdqZ/rQ9yHKSgGbjZtG1uiSqWyFwWvXmrdd3/sIdX33eykGvIcf+OrvvcXVUw==}
     hasBin: true
@@ -2487,6 +2503,10 @@ packages:
 
   /argparse/2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
+    dev: false
+
+  /argsarray/0.0.1:
+    resolution: {integrity: sha512-u96dg2GcAKtpTrBdDoFIM7PjcBA+6rSP0OR94MOReNRyUECL6MtQt5XXmRr4qrftYaef9+l5hcpO5te7sML1Cg==}
     dev: false
 
   /arr-diff/4.0.0:
@@ -4674,6 +4694,15 @@ packages:
       - encoding
     dev: false
 
+  /expo-sqlite/10.3.0_expo@46.0.15:
+    resolution: {integrity: sha512-i9jyOfDw472Ueqnhl4LvspSpBVRzeuGjPWFwDYnaBgNOV3HLeK9Q6P5ixV2/on5RenfL4jsxOQtgeZAXke9/UQ==}
+    peerDependencies:
+      expo: '*'
+    dependencies:
+      '@expo/websql': 1.0.1
+      expo: 46.0.15_@babel+core@7.19.3
+    dev: false
+
   /expo-status-bar/1.4.0:
     resolution: {integrity: sha512-vh98g8qMIjig/2XTBsoAWS6Vo2dIIwDWjB3/GiuZ9Lazpxc9GO/APfJ4dar7MibzIDUKIrjotrcL6rLdPH13Ew==}
     dev: false
@@ -5699,6 +5728,10 @@ packages:
     hasBin: true
     dependencies:
       queue: 6.0.2
+    dev: false
+
+  /immediate/3.3.0:
+    resolution: {integrity: sha512-HR7EVodfFUdQCTIeySw+WDRFJlPcLOJbXfwwZ7Oom6tjsvZ3bOkCDJHehQC3nxJrv7+f9XecwazynjU8e4Vw3Q==}
     dev: false
 
   /immer/8.0.1:
@@ -7391,6 +7424,10 @@ packages:
     engines: {node: '>=0.12.0'}
     dev: false
 
+  /noop-fn/1.0.0:
+    resolution: {integrity: sha512-pQ8vODlgXt2e7A3mIbFDlizkr46r75V+BJxVAyat8Jl7YmI513gG5cfyRL0FedKraoZ+VAouI1h4/IWpus5pcQ==}
+    dev: false
+
   /normalize-css-color/1.0.2:
     resolution: {integrity: sha512-jPJ/V7Cp1UytdidsPqviKEElFQJs22hUUgK5BOPHTwOonNCk7/2qOxhhqzEajmFrWJowADFfOFh1V+aWkRfy+w==}
     dev: false
@@ -8267,6 +8304,10 @@ packages:
     dependencies:
       picocolors: 0.2.1
       source-map: 0.6.1
+    dev: false
+
+  /pouchdb-collections/1.0.1:
+    resolution: {integrity: sha512-31db6JRg4+4D5Yzc2nqsRqsA2oOkZS8DpFav3jf/qVNBxusKa2ClkEIZ2bJNpaDbMfWtnuSq59p6Bn+CipPMdg==}
     dev: false
 
   /pretty-bytes/5.6.0:
@@ -9930,6 +9971,10 @@ packages:
 
   /timsort/0.3.0:
     resolution: {integrity: sha512-qsdtZH+vMoCARQtyod4imc2nIJwg9Cc7lPRrw9CzF8ZKR0khdr8+2nX80PBhET3tcyTtJDxAffGh2rXH4tyU8A==}
+    dev: false
+
+  /tiny-queue/0.2.1:
+    resolution: {integrity: sha512-EijGsv7kzd9I9g0ByCl6h42BWNGUZrlCSejfrb3AKeHC33SGbASu1VDf5O3rRiiUOhAC9CHdZxFPbZu0HmR70A==}
     dev: false
 
   /tmp/0.0.33:
