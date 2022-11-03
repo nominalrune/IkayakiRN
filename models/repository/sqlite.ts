@@ -1,8 +1,13 @@
 import { Platform } from "react-native";
 import * as SQLite from 'expo-sqlite';
 import * as FileSystem from 'expo-file-system';
-import { Asset } from 'expo-asset';
 import { Id } from '/models/ValueObjectTemplates/Id';
+import {Float, Int, Str, DateTime, } from "../ValueObjectTemplates/BaseClass";
+
+// export type sqliteType<T,U extends Float<T>|Int<T>|Str<T>|DateTime<T>|Id<T>> =(
+// 	U extends Float<T>|Int<T>|Id<T>|DateTime<T> ? number
+// 	: string
+// )
 
 export async function openDatabase(dbName: string) {
 	if (Platform.OS === "web") {
@@ -65,7 +70,7 @@ export class SqliteClient {
 			);
 		});
 	}
-	public async insert<T>(table: string, _item: Partial<T>): Promise<T | undefined> {
+	public async insert<T extends object>(table: string, _item: T): Promise<T | undefined> { // TODO
 		const que = `insert into ${table} (${Object.keys(_item).join(",")}) values (${Object.values(_item).map(val => val instanceof Date ? val.valueOf().toString() : `'${val}'`).join(",")});`;
 		console.log({ que });
 		return await new Promise((resolve, reject) => {

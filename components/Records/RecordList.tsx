@@ -8,9 +8,9 @@ export function RecordList({ records }: { records: Record[]; }) {
 		<View>
 			{records.map((record, i) => (
 				<View>
-					<Text key={i+record.title}>{record.title}</Text>
-					<Text key={i+record.description.slice(0,5)}>{record.description}</Text>
-					<Text key={i+record.user.name}>{record.user.name}</Text>
+					<Text key={i+record.title.value}>{record.title.value}</Text>
+					<Text key={i+record.description.value.slice(0,5)}>{record.description.value}</Text>
+					<Text key={i+record.user.name.value}>{record.user.name.value}</Text>
 				</View>
 			))}
 		</View>

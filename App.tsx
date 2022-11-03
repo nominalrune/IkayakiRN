@@ -4,6 +4,8 @@ import { StyleSheet, Text, View, GestureResponderEvent } from 'react-native';
 import { Repository } from './models/repository/Repository';
 import { RecordList } from './components/Records/RecordList';
 import { AddRecord } from './components/Records/AddRecord';
+import { Record } from './models/Record/Record';
+import { Task } from './models/Task';
 export default function App() {
   const repo = new Repository();
   useEffect(() => {
@@ -15,7 +17,7 @@ export default function App() {
   async function handleSave(event: GestureResponderEvent,inputs:{ title: string, description: string, startedAt: Date, finishedAt: Date; }) {
     console.log('save');
     console.log({inputs});
-    const res = await repo.add("records", inputs)
+    const res = await repo.add("records", Task.fromJson(inputs)) as Record;
     console.log({res});
   }
   return (

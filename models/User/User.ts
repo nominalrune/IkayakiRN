@@ -3,29 +3,29 @@ import { Id } from '../ValueObjectTemplates/Id';
 
 export interface IUser {
 	id: Id<IUser>;
-	createdAt: DateTime;
-	updatedAt: DateTime;
-	name: string;
-	email: string;
-	passwordHash: string;
+	createdAt: DateTime<IUser>;
+	updatedAt: DateTime<IUser>;
+	name: Str<IUser>;
+	email: Str<IUser>;
+	passwordHash: Str<IUser>;
 	meta: IUserMeta[];
 	acls: unknown[];
 }
 export interface IUserMeta {
 	id: Id<IUserMeta>;
-	userId: number;
+	userId: Id<IUser>;
 	user: IUser;
-	key: string;
-	value: string;
+	key: Str<IUser>;
+	value: Str<IUser>;
 }
 
 export class User{
 	public readonly id: Id<IUser>;
-	public readonly createdAt: DateTime;
-	public readonly updatedAt: DateTime;
-	public readonly name: string;
-	public readonly email: string;
-	public readonly passwordHash: string;
+	public readonly createdAt: DateTime<IUser>;
+	public readonly updatedAt: DateTime<IUser>;
+	public readonly name: Str<IUser>;
+	public readonly email: Str<IUser>;
+	public readonly passwordHash: Str<IUser>;
 	public readonly meta: IUserMeta[];
 	public readonly acls: unknown[];
 	constructor(
@@ -41,9 +41,9 @@ export class User{
 		this.id = new Id<IUser>(id);
 		this.createdAt = new DateTime(createdAt);
 		this.updatedAt = new DateTime(updatedAt);
-		this.name = name;
-		this.email = email;
-		this.passwordHash = passwordHash;
+		this.name = new Str(name);
+		this.email = new Str(email);
+		this.passwordHash = new Str(passwordHash);
 		this.meta = meta;
 		this.acls = acls;
 	}
