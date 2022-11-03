@@ -1,4 +1,4 @@
-abstract class ObjectValueBaseClass<T>{
+export class ValueObjectBaseClass<T>{
 	protected _value: T;
 	constructor(value: T) {
 		this._value = value;
@@ -15,12 +15,13 @@ abstract class ObjectValueBaseClass<T>{
 		}
 	}
 }
-function WithValidate<T>(validate: (value: T) => value is T) {
-	return class extends ObjectValueBaseClass<T>{
-		static validate = validate;
+
+function withValidate<T>(...validators: ((value: T) => value is T)[]) {
+	return class WithValidate extends ValueObjectBaseClass<T>{
+		validate(value:T){return validators.every(validator=>validator(value))};
 		constructor(value: T) {
 			super(value);
-			if (!validate(value)) {
+			if (!this.validate(value)) {
 				throw new Error(`Invalid value: ${value}`);
 			}
 			this._value = value;
@@ -28,25 +29,20 @@ function WithValidate<T>(validate: (value: T) => value is T) {
 	}
 }
 
-export class Str extends ObjectValueBaseClass<string>{
+export class Str extends ValueObjectBaseClass<string>{
 	constructor(_value: string) {
 		super(_value);
 	}
 }
-export class Float extends ObjectValueBaseClass<number>{
+export class Float extends ValueObjectBaseClass<number>{
 	constructor(value: number) {
 		super(value);
 	}
 }
-export class Int extends ObjectValueBaseClass<number>{
-	protected validate(value: unknown): value is number {
-		return Number.isInteger(value);
-	}
-	constructor(value: number) {
-		super(value);
-	}
-}
-export class DateTime extends ObjectValueBaseClass<Date>{
+
+export const Int =withValidate<number>(((value: number):value is number => Number.isInteger(value)));
+
+export class DateTime extends ValueObjectBaseClass<Date>{
 	constructor(...params: ConstructorParameters<typeof Date>) {
 		const value = new Date(...params);
 		super(value);

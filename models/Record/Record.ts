@@ -19,6 +19,7 @@ interface IRecord {
 	task?:ITask;
 }
 
+
 export class Record implements IRecord {
 	public readonly id: Id<IRecord>;
 	public readonly acl: Acl<IRecord>;

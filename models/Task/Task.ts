@@ -24,6 +24,7 @@ export class Task implements ITask{
 		public createdAt: Date=new Date(),
 		public updatedAt?: Date,
 		public id= new Id<ITask>(),
+		public parentId?: Id<ITask>,
 	){
 	}
 }

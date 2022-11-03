@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/core': ^7.12.9
   '@expo/webpack-config': ^0.17.0
+  '@react-native-community/datetimepicker': 6.2.0
   '@types/react': ~18.0.14
   '@types/react-native': ~0.69.1
   babel-preset-expo: ^9.2.0
@@ -19,6 +20,7 @@ specifiers:
 
 dependencies:
   '@expo/webpack-config': 0.17.2_jnlmfjh43ps2qiose3hkhokxfa
+  '@react-native-community/datetimepicker': 6.2.0
   expo: 46.0.15_@babel+core@7.19.3
   expo-asset: 8.6.1_expo@46.0.15
   expo-file-system: 14.1.0_expo@46.0.15
@@ -1997,6 +1999,12 @@ packages:
       - encoding
       - supports-color
       - utf-8-validate
+    dev: false
+
+  /@react-native-community/datetimepicker/6.2.0:
+    resolution: {integrity: sha512-w1ZS+wYO3qSASliRp+B7mPphOhtVm++rhSbj1WsgXdgLgDXSkDxpMnAXXQu9M0XdcgBwVJ6wDExeIwuzU5Jtfg==}
+    dependencies:
+      invariant: 2.2.4
     dev: false
 
   /@react-native/assets/1.0.0:

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/webpack-config": "^0.17.0",
+    "@react-native-community/datetimepicker": "6.2.0",
     "expo": "~46.0.13",
     "expo-asset": "~8.6.1",
     "expo-file-system": "~14.1.0",
