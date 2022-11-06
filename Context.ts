@@ -1,10 +1,10 @@
-import { Id } from "../ValueObjectTemplates/Id";
-import { Record, IRecordSqliteData } from '../Record/Record';
-import { Task, ITaskSqliteData } from '../Task/Task';
-import { User } from "../User/User";
-import { openDatabase } from "./sqlite";
-import type { SqliteClient } from "./sqlite";
-import type { Float, Int, Str, DateTime, ValueObjectBaseClass } from "../ValueObjectTemplates/BaseClass";
+import { Id } from "./models/ValueObjectTemplates/Id";
+import { Record, IRecordSqliteData } from './models/Record/Record';
+import { Task, ITaskSqliteData } from './models/Task/Task';
+import { User } from "./models/User/User";
+import { openDatabase } from "./models/repository/sqlite";
+import type { SqliteClient } from "./models/repository/sqlite";
+import type { Float, Int, Str, DateTime, ValueObjectBaseClass } from "./models/ValueObjectTemplates/BaseClass";
 
 type HasId<T> = {
 	id: Id<T>;
@@ -35,10 +35,10 @@ type table<T> = (
 );
 
 type Class = typeof Record | typeof Task;
-function Static<T extends Class>(instance: InstanceType<T>) {
+function Static<T extends {new (...args: any): any}>(instance: InstanceType<T>) {
 	// if(typeof instance === "object" && instance) return instance.constructor as T;
-	return instance.constructor as T;
 	// throw new Error("not instance type");
+	return instance.constructor as T;
 }
 // function Static<T extends Class>(this: T) {
 // 	return this.constructor;
@@ -106,13 +106,14 @@ export class Repository {
 		console.log({ records: this.records.values(), tasks: this.tasks.values() });
 	};
 
-	async add<T extends Record | Task>(type: table<T>, item: T) {
+	async add<T extends Record | Task>(type: table<T>, item: T):Promise<T> {
 		if (this.db) {
 			const _item = await this.db.insert<sqlite<T>>(type, item.toSqlite() as sqlite<T>); // TODO
 			console.log({ _item });
 			if (_item) {
-				return ( Static(item) as typeof Record | typeof Task).fromSqlite(_item as IRecordSqliteData & ITaskSqliteData); // TODO
+				return (item.constructor as typeof Record|typeof Task).fromSqlite(_item as IRecordSqliteData & ITaskSqliteData) as T; // TODO
 			}
+
 			throw new Error("failed to insert");
 		}
 		throw new Error("no db");

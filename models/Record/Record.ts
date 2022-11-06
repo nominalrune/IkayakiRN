@@ -18,6 +18,8 @@ interface IRecord {
 	acl: Acl<IRecord>;
 	taskId?: Id<ITask>;
 	task?: ITask;
+	toSqlite(): IRecordSqliteData;
+	toJson(): string;
 }
 export interface IRecordData {
 	id: number;
@@ -41,7 +43,6 @@ export interface IRecordSqliteData {
 	userId: number;
 	taskId: number;
 }
-
 export class Record implements IRecord {
 	public readonly id: Id<IRecord>;
 	public readonly acl: Acl<IRecord>;
@@ -63,7 +64,7 @@ export class Record implements IRecord {
 	}
 	public static fromSqlite(recordData: IRecordSqliteData): Record {
 		return new Record(
-			{ user: new User(0, 0, 0, "", "", "", [], []), role: {} },
+			{ user: new User(recordData.userId, "", "",  [], []), role: {} },
 			new Str(recordData.title),
 			new Str(recordData.description),
 			new DateTime(new Date(recordData.startedAt)),
@@ -72,9 +73,20 @@ export class Record implements IRecord {
 			recordData.id
 		);
 	}
-	public static fromJson(recordData: Partial<IRecordData>): Record {
+	// public static fromJson(recordData: IRecordData): Record {
+	// 	return new Record(
+	// 		{ user: new User(recordData.userId, "", "",  [], []), role: {} }, // TODO
+	// 		new Str(recordData.title??""),
+	// 		new Str(recordData.description??""),
+	// 		new DateTime(new Date(recordData.startedAt??Date())),
+	// 		new DateTime(new Date(recordData.finishedAt??Date())),
+	// 		new Id(recordData.taskId),
+	// 		recordData.id
+	// 	);
+	// };
+	public static fromForm(recordData: Partial<IRecordData>): Record {
 		return new Record(
-			{ user: new User(0, 0, 0, "", "", "", [], []), role: {} }, // TODO
+			{ user: new User(recordData.userId ?? 0, "", "",  [], []), role: {} }, // TODO
 			new Str(recordData.title??""),
 			new Str(recordData.description??""),
 			new DateTime(new Date(recordData.startedAt??Date())),
@@ -87,6 +99,9 @@ export class Record implements IRecord {
 		return {
 			// TODO
 		}as IRecordSqliteData;
+	}
+	public toJson(): string {
+		return JSON.stringify(this); // TODO
 	}
 }
 

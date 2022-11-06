@@ -16,6 +16,10 @@ export interface ITask {
 	parentTask?: ITask;
 	userId: Id<IUser>;
 	user: IUser;
+	acl: Acl<ITask>;
+	constructor: typeof Task;
+	toSqlite(): ITaskSqliteData;
+	toJson(): string;
 }
 
 export interface ITaskData {
@@ -28,6 +32,7 @@ export interface ITaskData {
 	startDate?: Date;
 	endDate?: Date;
 	parentTaskId?: number;
+	userId: number;
 }
 export interface ITaskSqliteData {
 	id: number;
@@ -39,6 +44,7 @@ export interface ITaskSqliteData {
 	startDate?: number;
 	endDate?: number;
 	parentTaskId?: number;
+	userId: number;
 }
 
 export class Task implements ITask {
@@ -64,7 +70,7 @@ export class Task implements ITask {
 	};
 	public static fromSqlite(taskData: ITaskSqliteData): Task {
 		return new Task(
-			{ user: new User(0, 0, 0, "", "", "", [], []), role: {} },
+			{ user: new User(taskData.userId, "", "", [], []), role: {} },
 			new Str(taskData.title),
 			new Str(taskData.description),
 			taskData.status as TaskStatus,
@@ -76,7 +82,7 @@ export class Task implements ITask {
 	};
 	public static fromJson(taskData: ITaskData): Task {
 		return new Task(
-			{ user: new User(0, 0, 0, "", "", "", [], []), role: {} },
+			{ user: new User(taskData.userId, "", "",  [], []), role: {} },
 			new Str(taskData.title),
 			new Str(taskData.description),
 			taskData.status as TaskStatus, // TODO validate!
@@ -96,7 +102,22 @@ export class Task implements ITask {
 			endDate: this.endDate?.value.valueOf(),
 			parentTaskId: this.parentTaskId?.value,
 			createdAt:0,
-			updatedAt:0
+			updatedAt:0,
+			userId: this.userId.value,
 		};
 	};
+	public toJson(): string {
+		return JSON.stringify({
+			id: this.id.value,
+			title: this.title.value,
+			description: this.description.value,
+			status: this.status,
+			startDate: this.startDate?.value.valueOf(),
+			endDate: this.endDate?.value.valueOf(),
+			parentTaskId: this.parentTaskId?.value,
+			createdAt:0,
+			updatedAt:0,
+			userId: this.userId.value,
+		});
+	}
 }

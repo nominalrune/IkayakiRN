@@ -17,7 +17,7 @@ export default function App() {
   async function handleSave(event: GestureResponderEvent,inputs:{ title: string, description: string, startedAt: Date, finishedAt: Date; }) {
     console.log('save');
     console.log({inputs});
-    const res = await repo.add("records", Task.fromJson(inputs)) as Record;
+    const res = await repo.add<Record>("records",Record.fromForm(inputs));
     console.log({res});
   }
   return (
